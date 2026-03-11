@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AG Supervisor Online Test</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AG Supervisor Practice Test</h1>
+
+<div class="top">
+<div id="timer">90:00</div>
+<button onclick="submitTest()">Submit Test</button>
+</div>
+
+<form id="quizForm">
+
+<div id="questions"></div>
+
+</form>
+
+<div id="result"></div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+body{
+font-family: Arial;
+background:#f4f6fa;
+margin:0;
+padding:0;
+}
+
+.container{
+width:90%;
+max-width:900px;
+margin:auto;
+background:white;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+}
+
+h1{
+text-align:center;
+}
+
+.question{
+margin-bottom:20px;
+padding:15px;
+border-bottom:1px solid #ddd;
+}
+
+.options label{
+display:block;
+padding:5px;
+}
+
+#timer{
+font-size:20px;
+color:red;
+font-weight:bold;
+}
+
+button{
+padding:10px 20px;
+border:none;
+background:#007bff;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0056b3;
+}
+
+#result{
+margin-top:20px;
+font-size:20px;
+font-weight:bold;
+text-align:center;
+}
+const answers = {
+1:4,2:4,3:1,4:2,5:4,6:3,7:3,8:4,9:2,10:2,
+11:4,12:1,13:2,14:2,15:3,16:1,17:2,18:2,19:4,20:3,
+21:3,22:4,23:3,24:1,25:1,26:3,27:1,28:1,29:2,30:3,
+31:2,32:4,33:2,34:3,35:3,36:4,37:2,38:2,39:4,40:2,
+41:2,42:2,43:1,44:3,45:2,46:3,47:3,48:1,49:4,50:4,
+51:1,52:3,53:1,54:3,55:4,56:1,57:3,58:1,59:2,60:3,
+61:2,62:2,63:4,64:1,65:2,66:1,67:1,68:2,69:2,70:3
+};
+
+const questionsDiv = document.getElementById("questions");
+
+for(let i=1;i<=70;i++){
+
+let q = document.createElement("div");
+q.className="question";
+
+q.innerHTML = `
+<p>Question ${i}</p>
+
+<div class="options">
+
+<label><input type="radio" name="q${i}" value="1"> Option 1</label>
+<label><input type="radio" name="q${i}" value="2"> Option 2</label>
+<label><input type="radio" name="q${i}" value="3"> Option 3</label>
+<label><input type="radio" name="q${i}" value="4"> Option 4</label>
+
+</div>
+`;
+
+questionsDiv.appendChild(q);
+}
+
+
+function submitTest(){
+
+let score = 0;
+
+for(let i=1;i<=70;i++){
+
+let selected = document.querySelector(`input[name="q${i}"]:checked`);
+
+if(selected){
+
+if(parseInt(selected.value) === answers[i]){
+score++;
+}
+
+}
+
+}
+
+document.getElementById("result").innerHTML =
+"Your Score: " + score + " / 70";
+
+}
+
+
+
+let time = 5400;
+
+let timer = setInterval(()=>{
+
+let min = Math.floor(time/60);
+let sec = time%60;
+
+document.getElementById("timer").innerHTML =
+min + ":" + (sec<10?"0":"") + sec;
+
+time--;
+
+if(time<0){
+
+clearInterval(timer);
+submitTest();
+
+}
+
+},1000);
+  const quiz = [
+
+{q:"निम्न में से कौनसा त्यौहार चैत्र माह में मनाया जाता है?",o:["नागपंचमी","गोगा नवमी","तीज","घुड़ला"],a:4},
+
+{q:"देवउठनी एकादशी के बारे में कौनसा कथन गलत है?",o:["चातुर्मास समाप्त होता है","भगवान विष्णु जागते हैं","तुलसी विवाह होता है","आषाढ़ शुक्ल एकादशी को मनाया जाता है"],a:4},
+
+{q:"स्थान और त्योहार मिलान सही है?",o:["1-d 2-a 3-b 4-c","1-c 2-a 3-d 4-b","1-d 2-c 3-b 4-a","1-b 2-c 3-a 4-d"],a:1},
+
+{q:"बूंदी में कजली तीज किस माह में मनाई जाती है?",o:["श्रावण","भाद्रपद","फाल्गुन","चैत्र"],a:2},
+
+{q:"गुलाबी गणगौर कहाँ मनाई जाती है?",o:["बूंदी","पुष्कर","अजमेर","नाथद्वारा"],a:4},
+
+{q:"गणगौर गीत में गिंडोली कौन थी?",o:["राव सातल की पुत्री","बहादुर शाह की पुत्री","मेहमूद बेग की पुत्री","मल्लिनाथ की पुत्री"],a:3},
+
+{q:"गणगौर पर पिंडिया किसके अंकुर से पूजी जाती है?",o:["चावल","बाजरा","जौ","मक्का"],a:3},
+
+{q:"भाद्रपद में कौनसा त्योहार नहीं मनाया जाता?",o:["a,b,c","a,c,d","b,c","c,d"],a:4},
+
+{q:"ईसर-ईसरी की पूजा किस त्योहार पर होती है?",o:["तीज","गणगौर","रक्षाबंधन","नागपंचमी"],a:2},
+
+{q:"श्वेतांबर जैन पर्युषण पर्व कब मनाते हैं?",o:["श्रावण 8 दिन","भाद्रपद 8 दिन","श्रावण 7 दिन","भाद्रपद 7 दिन"],a:2},
+
+];
+
+while(quiz.length<70){
+
+quiz.push({
+q:"Question "+(quiz.length+1),
+o:["Option 1","Option 2","Option 3","Option 4"],
+a:1
+})
+
+}
+
+const questionsDiv=document.getElementById("questions")
+
+quiz.forEach((item,index)=>{
+
+let q=document.createElement("div")
+q.className="question"
+
+q.innerHTML=`
+<p><b>Q${index+1}. ${item.q}</b></p>
+
+<label><input type="radio" name="q${index}" value="1"> ${item.o[0]}</label>
+<label><input type="radio" name="q${index}" value="2"> ${item.o[1]}</label>
+<label><input type="radio" name="q${index}" value="3"> ${item.o[2]}</label>
+<label><input type="radio" name="q${index}" value="4"> ${item.o[3]}</label>
+`
+
+questionsDiv.appendChild(q)
+
+})
+
+function submitTest(){
+
+let score=0
+
+quiz.forEach((item,index)=>{
+
+let selected=document.querySelector(`input[name="q${index}"]:checked`)
+
+if(selected){
+
+if(parseInt(selected.value)===item.a){
+score++
+}
+
+}
+
+})
+
+document.getElementById("result").innerHTML="Score: "+score+" / 70"
+
+}
+
+let time=5400
+
+setInterval(()=>{
+
+let m=Math.floor(time/60)
+let s=time%60
+
+document.getElementById("timer").innerHTML=m+":"+s
+
+time--
+
+if(time<0){
+submitTest()
+}
+
+},1000) to 
